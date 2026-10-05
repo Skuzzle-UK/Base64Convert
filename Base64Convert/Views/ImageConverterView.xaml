@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:controls="clr-namespace:Base64Convert.Controls"
+             x:Class="Base64Convert.Views.ImageConverterView">
+
+    <!-- Transparent background makes the whole section a drop target on Windows. -->
+    <VerticalStackLayout Spacing="12" BackgroundColor="Transparent">
+        <VerticalStackLayout.GestureRecognizers>
+            <DropGestureRecognizer AllowDrop="True" DragOver="OnDragOver" DragLeave="OnDragLeave" Drop="OnDrop" />
+        </VerticalStackLayout.GestureRecognizers>
+
+        <!-- Mode + options -->
+        <Grid ColumnDefinitions="*,Auto" ColumnSpacing="12">
+            <controls:SegmentedControl x:Name="ModeSwitch" FirstText="Encode" SecondText="Decode"
+                                       MaximumWidthRequest="280" HorizontalOptions="Fill"
+                                       SelectionChanged="OnModeChanged" />
+            <controls:ToggleChip x:Name="DataUriChip" Grid.Column="1" Text="Data URI"
+                                 Toggled="OnDataUriToggled" />
+        </Grid>
+
+        <!-- Encode: image -> Base64 -->
+        <VerticalStackLayout x:Name="EncodePanel" Spacing="12">
+            <Border x:Name="SourceCard" Style="{StaticResource Card}">
+                <VerticalStackLayout Spacing="8">
+                    <Grid ColumnDefinitions="Auto,*" ColumnSpacing="8">
+                        <Label Text="Image" Style="{StaticResource Caption}" />
+                        <Label x:Name="SourceInfo" Grid.Column="1" Style="{StaticResource Count}" />
+                    </Grid>
+                    <Grid HeightRequest="160">
+                        <Image x:Name="SourcePreview" Aspect="AspectFit" />
+                        <Label x:Name="SourcePlaceholder" Text="{OnPlatform Default='Open or paste an image', WinUI='Open, paste or drop an image'}" Style="{StaticResource Hint}" />
+                    </Grid>
+                    <HorizontalStackLayout Style="{StaticResource Actions}">
+                        <controls:IconButton Icon="open" Text="Open" Clicked="OnOpenClicked" />
+                        <controls:IconButton Icon="paste" Text="Paste" Clicked="OnPasteImageClicked" />
+                        <controls:IconButton Icon="clear" Text="Clear" Clicked="OnClearImageClicked" />
+                    </HorizontalStackLayout>
+                </VerticalStackLayout>
+            </Border>
+
+            <Border Style="{StaticResource Card}">
+                <VerticalStackLayout Spacing="8">
+                    <Grid ColumnDefinitions="Auto,*" ColumnSpacing="8">
+                        <Label Text="Base64" Style="{StaticResource Caption}" />
+                        <Label x:Name="EncodedCount" Grid.Column="1" Style="{StaticResource Count}" />
+                    </Grid>
+                    <ScrollView HeightRequest="110">
+                        <Label x:Name="EncodedText" Style="{StaticResource CodeOutput}" />
+                    </ScrollView>
+                    <Label x:Name="EncodeStatus" Style="{StaticResource Status}" />
+                    <HorizontalStackLayout Style="{StaticResource Actions}">
+                        <controls:IconButton x:Name="CopyBase64Button" Icon="copy" Text="Copy" Clicked="OnCopyBase64Clicked" />
+                    </HorizontalStackLayout>
+                </VerticalStackLayout>
+            </Border>
+        </VerticalStackLayout>
+
+        <!-- Decode: Base64 -> image -->
+        <VerticalStackLayout x:Name="DecodePanel" Spacing="12" IsVisible="False">
+            <Border Style="{StaticResource Card}">
+                <VerticalStackLayout Spacing="8">
+                    <Grid ColumnDefinitions="Auto,*" ColumnSpacing="8">
+                        <Label Text="Base64" Style="{StaticResource Caption}" />
+                        <Label x:Name="DecodeInputCount" Grid.Column="1" Style="{StaticResource Count}" />
+                    </Grid>
+                    <Editor x:Name="DecodeInput" Style="{StaticResource Code}"
+                            Placeholder="Paste Base64 or a data URI" TextChanged="OnBase64Changed" />
+                    <HorizontalStackLayout Style="{StaticResource Actions}">
+                        <controls:IconButton Icon="paste" Text="Paste" Clicked="OnPasteBase64Clicked" />
+                        <controls:IconButton Icon="clear" Text="Clear" Clicked="OnClearBase64Clicked" />
+                    </HorizontalStackLayout>
+                </VerticalStackLayout>
+            </Border>
+
+            <Border Style="{StaticResource Card}">
+                <VerticalStackLayout Spacing="8">
+                    <Grid ColumnDefinitions="Auto,*" ColumnSpacing="8">
+                        <Label Text="Image" Style="{StaticResource Caption}" />
+                        <Label x:Name="DecodedInfo" Grid.Column="1" Style="{StaticResource Count}" />
+                    </Grid>
+                    <Grid HeightRequest="160">
+                        <Image x:Name="DecodedPreview" Aspect="AspectFit" />
+                        <Label x:Name="DecodedPlaceholder" Text="Image appears here" Style="{StaticResource Hint}" />
+                    </Grid>
+                    <Label x:Name="DecodeStatus" Style="{StaticResource Status}" />
+                    <HorizontalStackLayout Style="{StaticResource Actions}">
+                        <controls:IconButton x:Name="CopyImageButton" Icon="copy" Text="Copy" Clicked="OnCopyImageClicked" />
+                        <controls:IconButton Icon="save" Text="Save" Clicked="OnSaveClicked" />
+                    </HorizontalStackLayout>
+                </VerticalStackLayout>
+            </Border>
+        </VerticalStackLayout>
+    </VerticalStackLayout>
+
+</ContentView>

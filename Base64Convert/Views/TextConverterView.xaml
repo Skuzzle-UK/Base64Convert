@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:controls="clr-namespace:Base64Convert.Controls"
+             x:Class="Base64Convert.Views.TextConverterView">
+
+    <VerticalStackLayout Spacing="12">
+
+        <!-- Mode + options -->
+        <Grid ColumnDefinitions="*,Auto" ColumnSpacing="12">
+            <controls:SegmentedControl x:Name="ModeSwitch" FirstText="Encode" SecondText="Decode"
+                                       MaximumWidthRequest="280" HorizontalOptions="Fill"
+                                       SelectionChanged="OnModeChanged" />
+            <controls:ToggleChip x:Name="UrlSafeChip" Grid.Column="1" Text="URL-safe"
+                                 Toggled="OnUrlSafeToggled" />
+        </Grid>
+
+        <!-- Input -->
+        <Border Style="{StaticResource Card}">
+            <VerticalStackLayout Spacing="8">
+                <Grid ColumnDefinitions="Auto,*" ColumnSpacing="8">
+                    <Label x:Name="InputCaption" Style="{StaticResource Caption}" />
+                    <Label x:Name="InputCount" Grid.Column="1" Style="{StaticResource Count}" />
+                </Grid>
+                <Editor x:Name="InputEditor" Style="{StaticResource Code}" TextChanged="OnInputChanged" />
+                <HorizontalStackLayout Style="{StaticResource Actions}">
+                    <controls:IconButton Icon="paste" Text="Paste" Clicked="OnPasteClicked" />
+                    <controls:IconButton Icon="clear" Text="Clear" Clicked="OnClearClicked" />
+                </HorizontalStackLayout>
+            </VerticalStackLayout>
+        </Border>
+
+        <!-- Output -->
+        <Border Style="{StaticResource Card}">
+            <VerticalStackLayout Spacing="8">
+                <Grid ColumnDefinitions="Auto,*" ColumnSpacing="8">
+                    <Label x:Name="OutputCaption" Style="{StaticResource Caption}" />
+                    <Label x:Name="OutputCount" Grid.Column="1" Style="{StaticResource Count}" />
+                </Grid>
+                <ScrollView HeightRequest="110">
+                    <Label x:Name="OutputText" Style="{StaticResource CodeOutput}" />
+                </ScrollView>
+                <Label x:Name="StatusLabel" Style="{StaticResource Status}" />
+                <HorizontalStackLayout Style="{StaticResource Actions}">
+                    <controls:IconButton x:Name="CopyButton" Icon="copy" Text="Copy" Clicked="OnCopyClicked" />
+                </HorizontalStackLayout>
+            </VerticalStackLayout>
+        </Border>
+    </VerticalStackLayout>
+
+</ContentView>

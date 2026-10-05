@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Split frame: a picture on the left becomes encoded lines on the right.
+     Scaled to sit inside the Android adaptive-icon safe zone. -->
+<svg width="456" height="456" viewBox="0 0 456 456" xmlns="http://www.w3.org/2000/svg">
+  <g transform="translate(228 228) scale(0.82) translate(-228 -228)">
+    <rect x="92" y="108" width="272" height="240" rx="36" fill="#1F2937" />
+    <circle cx="150" cy="168" r="22" fill="#FBBF24" />
+    <path d="M108 312 L170 226 L212 280 L228 262 V332 H120 Q108 332 108 320 Z" fill="#34D399" />
+    <path d="M228 108 V348" stroke="#111827" stroke-width="6" />
+    <g stroke-width="16" stroke-linecap="round">
+      <path d="M256 176H276M296 176H336" stroke="#60A5FA" />
+      <path d="M256 214H316" stroke="#A78BFA" />
+      <path d="M256 252H284M304 252H336" stroke="#60A5FA" />
+      <path d="M256 290H300" stroke="#34D399" />
+      <path d="M256 324H272M292 324H336" stroke="#A78BFA" />
+    </g>
+  </g>
+</svg>

@@ -1,0 +1,9 @@
+bin/
+obj/
+.vs/
+*.user
+
+# Signing secrets: back these up elsewhere, never commit them.
+*.keystore
+*.jks
+Signing.props
